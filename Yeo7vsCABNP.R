@@ -16,9 +16,6 @@ library(cowplot)
 possible_wb_paths <- c("/usr/bin/wb_command", "/home1/Jaquent/Toolboxes/workbench/bin_rh_linux64/")
 load_ciftiTools(possible_wb_paths) # Using ciftiTools_0.12.2
 
-# Set working directory
-setwd("/media/alex/shared/work/GitHub/network_mapping_differences/")
-
 # /* 
 # ----------------------------- Prepare data ---------------------------
 # */
@@ -107,5 +104,5 @@ p_combined <- plot_grid(p_main, p_brain, rel_widths = c(6, 1), nrow = 1)
 p_combined
 
 # Save
-ggsave("Yeo7_vs_CAB-NP.png", p_combined, width = 1920*2, height = 1080*2, units = "px")
+ggsave("Yeo7_vs_CAB-NP.png", p_combined, width = 3840, height = 2160, units = "px")
 
