@@ -93,7 +93,7 @@ p_main <- ggplot(df_long, aes(x = x,
 p_brain <- ggplot() + 
   geom_image(aes(x = 0.5, y = 0.5, image = "support_images/Yeo6.png"), size = 0.2, by = "width") + 
   geom_image(aes(x = 0.5, y = 1, image = "support_images/CAB_NP.png"), size = 0.2, by = "width") + 
-  geom_text(aes(x = 0.5, y = 0.35, label = "Yeo 7")) +
+  # geom_text(aes(x = 0.5, y = 0.35, label = "Yeo 7")) +
   geom_text(aes(x = 0.5, y = 0.85, label = "CAB NP")) +
   coord_cartesian(ylim = c(0, 1.5)) +
   theme_nothing() + 
