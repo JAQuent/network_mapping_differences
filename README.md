@@ -1,4 +1,4 @@
-# Network mapping differences across different brain parcellations
+# Network mapping differences across brain parcellations
 
 This repository contains code to compare brain network parcellations in CIFTI space e.g. Yeo 7 vs. CAB NP see `Yeo7_vs_CAB-NP.R`.
 
