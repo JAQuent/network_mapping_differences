@@ -4,7 +4,7 @@
 # ----------------------------- Libraries & paths ---------------------------
 # */
 # install.packages("remotes")
-# remotes::install_github("davidsjoberg/ggsankey")
+# remotes::install_github("davidsjoberg/ggsankey", upgrade = 'never')
 library(ggsankey)
 library(ggplot2)
 library(assortedRFunctions) 
@@ -21,7 +21,8 @@ load_ciftiTools(possible_wb_paths) # Using ciftiTools_0.12.2
 # */
 # Load Yeo 7 and CABNP parcellation 
 Yeo7_xii  <- read_cifti("Yeo7.dlabel.nii")
-CABNP_xii <- read_cifti("CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_netassignments_LR.dlabel.nii")
+CABNP_xii <- read_cifti("CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_netassignments_LR.dlabel.nii",
+                        brainstructures = c("left", "right"))
 
 # Create data frame
 df <- data.frame(Yeo7 = c(as.matrix(Yeo7_xii)),  
@@ -48,14 +49,41 @@ df_long <- make_long(df, Yeo7, CAB_NP)
 # */
 # CIFTI plotting parameters
 CIFTI_width <- 1300
-view_cifti_surface(Yeo7_xii, fname = "support_images/Yeo6.png", 
+view_cifti_surface(Yeo7_xii, fname = "support_images/Yeo6_L_medial.png", 
                    width = CIFTI_width, view = "medial", hemisphere = "left",
                    legend_fname = "support_images/Yeo6_legend.png",
                    legend_embed = FALSE)
-view_cifti_surface(CABNP_xii, fname = "support_images/CAB_NP.png", 
+view_cifti_surface(Yeo7_xii, fname = "support_images/Yeo6_R_medial.png", 
+                   width = CIFTI_width, view = "medial", hemisphere = "left",
+                   legend_fname = "support_images/Yeo6_legend.png",
+                   legend_embed = FALSE)
+view_cifti_surface(Yeo7_xii, fname = "support_images/Yeo6_L_lateral.png", 
+                   width = CIFTI_width, view = "lateral", hemisphere = "left",
+                   legend_fname = "support_images/Yeo6_legend.png",
+                   legend_embed = FALSE)
+view_cifti_surface(Yeo7_xii, fname = "support_images/Yeo6_R_lateral.png", 
+                   width = CIFTI_width, view = "lateral", hemisphere = "right",
+                   legend_fname = "support_images/Yeo6_legend.png",
+                   legend_embed = FALSE)
+
+
+view_cifti_surface(CABNP_xii, fname = "support_images/CAB_NP_L_medial.png", 
                    width = CIFTI_width, view = "medial", hemisphere = "left",
                    legend_fname = "support_images/CAB_NP_legend.png",
                    legend_embed = FALSE)
+view_cifti_surface(CABNP_xii, fname = "support_images/CAB_NP_R_medial.png", 
+                   width = CIFTI_width, view = "medial", hemisphere = "left",
+                   legend_fname = "support_images/CAB_NP_legend.png",
+                   legend_embed = FALSE)
+view_cifti_surface(CABNP_xii, fname = "support_images/CAB_NP_L_lateral.png", 
+                   width = CIFTI_width, view = "lateral", hemisphere = "left",
+                   legend_fname = "support_images/CAB_NP_legend.png",
+                   legend_embed = FALSE)
+view_cifti_surface(CABNP_xii, fname = "support_images/CAB_NP_R_lateral.png", 
+                   width = CIFTI_width, view = "lateral", hemisphere = "right",
+                   legend_fname = "support_images/CAB_NP_legend.png",
+                   legend_embed = FALSE)
+
 
 # /* 
 # ----------------------------- Construct figure  ---------------------------
@@ -91,9 +119,9 @@ p_main <- ggplot(df_long, aes(x = x,
 
 # Create brain figure
 p_brain <- ggplot() + 
-  geom_image(aes(x = 0.5, y = 0.5, image = "support_images/Yeo6.png"), size = 0.2, by = "width") + 
-  geom_image(aes(x = 0.5, y = 1, image = "support_images/CAB_NP.png"), size = 0.2, by = "width") + 
-  # geom_text(aes(x = 0.5, y = 0.35, label = "Yeo 7")) +
+  geom_image(aes(x = 0.5, y = 0.5, image = "support_images/Yeo6_L_medial.png"), size = 0.2, by = "width") + 
+  geom_image(aes(x = 0.5, y = 1, image = "support_images/CAB_NP_L_medial.png"), size = 0.2, by = "width") + 
+  geom_text(aes(x = 0.5, y = 0.35, label = "Yeo 7")) +
   geom_text(aes(x = 0.5, y = 0.85, label = "CAB NP")) +
   coord_cartesian(ylim = c(0, 1.5)) +
   theme_nothing() + 
